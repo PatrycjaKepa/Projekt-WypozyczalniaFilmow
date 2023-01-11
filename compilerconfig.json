@@ -1,0 +1,13 @@
+[
+  {
+    "outputFile": "wwwroot/css/style.css",
+    "inputFile": "Content/Styles/StyleSheet.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
+  }
+]
