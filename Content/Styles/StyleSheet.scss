@@ -1,3 +1,88 @@
-﻿body {
+﻿$font-montserrat: 'Montserrat', sans-serif;
+html{
+    height : 100%;
+}
+body{
+    min-height : 100%;
+}
+.parallax {
+    height : 1080px;
+    background-image: url("../../wwwroot/images/background_1.jpg");
+    background-attachment: fixed;
+    background-position : center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+nav{
+    background-color : transparent;
+}
+.nav-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    padding: 0;
+    margin: 0;
+    height: 100px;
+    align-items : center;
+    list-style: none;
+}
+.logos {
+    flex-grow: 1;
+    text-align : left;
+   
+}
+.logo {
+    font-size: 50px;
+    font-family: $font-montserrat;
+    letter-spacing: .2rem;
+}
+.menus {
+    flex-grow: 1;
+    text-align: right;
+    font-family: $font-montserrat;
     
 }
+.menu {
+    border: 1px solid #9cbff1;
+    border-radius: 20px 0 20px 20px;
+    color: white;
+    font-weight: bold;
+    }
+.menu :hover {
+        background-color : white;
+    }
+
+
+.text_1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #9cbff1;
+    font-weight: bold;
+    font-size: 200px;
+    text-shadow: 5px 5px 2px white;
+    margin : 200px 0 0 0;
+}
+.text_2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
+    text-align : center;
+}
+.rent{
+display : flex;
+justify-content : center;
+margin : 100px 0 100px 0;
+}
+.rent_btn {
+    border: 1px solid #9cbff1;
+    border-radius: 20px 0 20px 20px;
+    background-color: #9cbff1;
+    width: 400px;
+    color: white;
+}
+
+ 
