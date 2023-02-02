@@ -3,11 +3,12 @@ html{
     height : 100%;
 }
 body{
+    
     min-height : 100%;
 }
-.parallax {
-    height : 1080px;
-    background-image: url("../../wwwroot/images/background_1.jpg");
+.home {
+    height : 800px;
+    //background-image: url("../../wwwroot/images/background_1.jpg");
     background-attachment: fixed;
     background-position : center;
     background-repeat: no-repeat;

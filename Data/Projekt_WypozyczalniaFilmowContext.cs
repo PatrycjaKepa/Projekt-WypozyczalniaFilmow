@@ -15,5 +15,10 @@ namespace Projekt_WypozyczalniaFilmow.Data
         }
 
         public DbSet<Projekt_WypozyczalniaFilmow.Models.User> User { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().ToTable("User");
+        }
     }
 }
