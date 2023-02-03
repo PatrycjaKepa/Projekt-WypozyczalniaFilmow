@@ -15,10 +15,16 @@ namespace Projekt_WypozyczalniaFilmow.Data
         }
 
         public DbSet<Projekt_WypozyczalniaFilmow.Models.User> User { get; set; } = default!;
+        public DbSet<Projekt_WypozyczalniaFilmow.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<Projekt_WypozyczalniaFilmow.Models.Category> Category { get; set; } = default!;
+        public DbSet<Projekt_WypozyczalniaFilmow.Models.Lend> Lend { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Movie>().ToTable("Movie");
+            modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Lend>().ToTable("Lend");
         }
     }
 }

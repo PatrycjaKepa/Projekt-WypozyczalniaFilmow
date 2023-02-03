@@ -56,6 +56,9 @@ namespace Projekt_WypozyczalniaFilmow
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //SEED
+            UserDataInitializer.Initialize(app);
         }
     }
 }
