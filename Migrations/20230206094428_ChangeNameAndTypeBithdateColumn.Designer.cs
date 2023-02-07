@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt_WypozyczalniaFilmow.Data;
 
@@ -11,9 +12,10 @@ using Projekt_WypozyczalniaFilmow.Data;
 namespace Projekt_WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(Projekt_WypozyczalniaFilmowContext))]
-    partial class Projekt_WypozyczalniaFilmowContextModelSnapshot : ModelSnapshot
+    [Migration("20230206094428_ChangeNameAndTypeBithdateColumn")]
+    partial class ChangeNameAndTypeBithdateColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,31 +43,13 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
 
             modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.Lend", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<string>("BeingLate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Client")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HowMuchWeeks")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MovieName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("RentDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Lend", (string)null);
                 });

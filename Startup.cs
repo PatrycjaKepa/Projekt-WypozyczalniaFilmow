@@ -59,6 +59,7 @@ namespace Projekt_WypozyczalniaFilmow
 
             //SEED
             UserDataInitializer.Initialize(app);
+            MovieDataInitislizer.Initialize(app);
         }
     }
 }

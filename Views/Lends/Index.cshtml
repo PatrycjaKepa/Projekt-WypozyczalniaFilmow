@@ -1,3 +1,57 @@
-﻿@{
+﻿@model IEnumerable<Projekt_WypozyczalniaFilmow.Models.Lend>
+
+@{
     ViewData["Title"] = "Index";
 }
+
+<h1>Lends</h1>
+
+<div class="row">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HowMuchWeeks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeingLate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HowMuchWeeks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeingLate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

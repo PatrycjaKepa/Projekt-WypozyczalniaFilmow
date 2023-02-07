@@ -1,3 +1,65 @@
-﻿@{
+﻿@model IEnumerable<Projekt_WypozyczalniaFilmow.Models.Movie>
+
+@{
     ViewData["Title"] = "Index";
 }
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Movies</h1>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-2">
+        <a asp-controller="Movies" asp-action="Create">
+            <button class="btn btn-primary">Create new movie</button>
+        </a>
+    </div>
+
+    <div class="row">
+        <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+                for week
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Category)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+        
+    </div>
+</div>

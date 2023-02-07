@@ -26,15 +26,15 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? Id)
         {
-            if (id == null || _context.Movie == null)
+            if (Id == null || _context.Movie == null)
             {
                 return NotFound();
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (movie == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,price,category,description")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Category,Description")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -66,14 +66,14 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         }
 
         // GET: Movies/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? Id)
         {
-            if (id == null || _context.Movie == null)
+            if (Id == null || _context.Movie == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
+            var movie = await _context.Movie.FindAsync(Id);
             if (movie == null)
             {
                 return NotFound();
@@ -86,9 +86,9 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,price,category,description")] Movie movie)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Name,Price,Category,Description")] Movie movie)
         {
-            if (id != movie.id)
+            if (Id != movie.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.id))
+                    if (!MovieExists(movie.Id))
                     {
                         return NotFound();
                     }
@@ -117,15 +117,15 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         }
 
         // GET: Movies/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? Id)
         {
-            if (id == null || _context.Movie == null)
+            if (Id == null || _context.Movie == null)
             {
                 return NotFound();
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (movie == null)
             {
                 return NotFound();
@@ -137,13 +137,13 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int Id)
         {
             if (_context.Movie == null)
             {
                 return Problem("Entity set 'Projekt_WypozyczalniaFilmowContext.Movie'  is null.");
             }
-            var movie = await _context.Movie.FindAsync(id);
+            var movie = await _context.Movie.FindAsync(Id);
             if (movie != null)
             {
                 _context.Movie.Remove(movie);
@@ -153,9 +153,9 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool MovieExists(int Id)
         {
-          return _context.Movie.Any(e => e.id == id);
+          return _context.Movie.Any(e => e.Id == Id);
         }
     }
 }
