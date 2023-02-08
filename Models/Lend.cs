@@ -11,7 +11,10 @@ namespace Projekt_WypozyczalniaFilmow.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime RentDate { get; set; }
-        public int HowMuchWeeks { get; set; }
-        public string BeingLate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime ReturnDate { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

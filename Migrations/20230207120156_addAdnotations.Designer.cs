@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt_WypozyczalniaFilmow.Data;
 
@@ -11,9 +12,10 @@ using Projekt_WypozyczalniaFilmow.Data;
 namespace Projekt_WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(Projekt_WypozyczalniaFilmowContext))]
-    partial class Projekt_WypozyczalniaFilmowContextModelSnapshot : ModelSnapshot
+    [Migration("20230207120156_addAdnotations")]
+    partial class addAdnotations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CategoryMovie", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("CategoryMovie");
-                });
 
             modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.Category", b =>
                 {
@@ -63,9 +50,16 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("BeingLate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Client")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HowMuchWeeks")
+                        .HasColumnType("int");
 
                     b.Property<string>("MovieName")
                         .IsRequired()
@@ -74,15 +68,7 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                     b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Lend", (string)null);
                 });
@@ -94,6 +80,13 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -147,37 +140,6 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
-                });
-
-            modelBuilder.Entity("CategoryMovie", b =>
-                {
-                    b.HasOne("Projekt_WypozyczalniaFilmow.Models.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Projekt_WypozyczalniaFilmow.Models.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.Lend", b =>
-                {
-                    b.HasOne("Projekt_WypozyczalniaFilmow.Models.User", "User")
-                        .WithMany("Lends")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.User", b =>
-                {
-                    b.Navigation("Lends");
                 });
 #pragma warning restore 612, 618
         }

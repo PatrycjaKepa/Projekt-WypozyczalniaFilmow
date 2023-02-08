@@ -19,5 +19,7 @@ namespace Projekt_WypozyczalniaFilmow.Models
         [StringLength(30, ErrorMessage = "First name cannot be longer than 30 characters.")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string Password { get; set; }
+
+        public ICollection<Lend> Lends { get; set; }
     }
 }

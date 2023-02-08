@@ -13,19 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <header>
-        <nav class="navbar navbar-dark bg-dark pt-3" data-bs-theme="dark" >
+        <nav class="navbar navbar-dark bg-transparent pt-3 pb-3" data-bs-theme="transparent" >
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Logo</a>
-                <a asp-controller="Users" asp-action="Create">
-                    <button class="btn btn-primary" type="button">Registration(create user)</button>
-                </a>
-                <button class="btn btn-primary">Login</button>
-                
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="menu-icon col-1">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                
             <div class="offcanvas offcanvas-end text-bg-white bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
                 <h2 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h2>
@@ -46,13 +44,29 @@
             </div>
             </div>
 
+            <div class="col-1">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Logo</a>
+            </div>
+            
+            <div class="col-2">
+                <a asp-controller="Users" asp-action="Create">
+                    <button class="btn btn-primary" type="button">Registration</button>
+                </a>
+            </div>
+                
+            <div class="col-1">
+                <button class="btn btn-primary">Login</button>
+            </div>
+
+            <div class="col-6"></div>
+                
             </div>
         </nav>
     </header>
-    <hr />
+    
     
 
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

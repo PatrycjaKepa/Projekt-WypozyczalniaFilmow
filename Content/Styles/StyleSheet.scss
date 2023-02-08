@@ -1,58 +1,69 @@
 ﻿$font-montserrat: 'Montserrat', sans-serif;
-html{
-    height : 100%;
+
+html {
+    height: 100%;
 }
-body{
-    
-    min-height : 100%;
-}
-.home {
-    height : 800px;
-    //background-image: url("../../wwwroot/images/background_1.jpg");
+
+body {
+    height: 100vh;
+    background-image: url("../../wwwroot/images/Spider-Universum.jpg");
     background-attachment: fixed;
-    background-position : center;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-nav{
-    background-color : transparent;
+
+.menu-icon {
+    text-align: center;
 }
-.nav-list{
+
+.vl {
+    border-left: 1px solid white;
+    height: 100vh;
+}
+.vertical-line {
+    justify-content:center;
+}
+
+
+.nav-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-
     padding: 0;
     margin: 0;
     height: 100px;
-    align-items : center;
+    align-items: center;
     list-style: none;
 }
+
 .logos {
     flex-grow: 1;
-    text-align : left;
-   
+    text-align: left;
 }
+
 .logo {
     font-size: 50px;
     font-family: $font-montserrat;
     letter-spacing: .2rem;
 }
+
 .menus {
     flex-grow: 1;
     text-align: right;
     font-family: $font-montserrat;
-    
 }
+
 .menu {
     border: 1px solid #9cbff1;
     border-radius: 20px 0 20px 20px;
     color: white;
     font-weight: bold;
-    }
+}
+
 .menu :hover {
-        background-color : white;
-    }
+    background-color: white;
+}
 
 
 .text_1 {
@@ -63,21 +74,24 @@ nav{
     font-weight: bold;
     font-size: 200px;
     text-shadow: 5px 5px 2px white;
-    margin : 200px 0 0 0;
+    margin: 200px 0 0 0;
 }
+
 .text_2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     font-size: 30px;
     color: white;
-    text-align : center;
+    text-align: center;
 }
-.rent{
-display : flex;
-justify-content : center;
-margin : 100px 0 100px 0;
+
+.rent {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0 100px 0;
 }
+
 .rent_btn {
     border: 1px solid #9cbff1;
     border-radius: 20px 0 20px 20px;
@@ -85,5 +99,3 @@ margin : 100px 0 100px 0;
     width: 400px;
     color: white;
 }
-
- 

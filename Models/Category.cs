@@ -12,6 +12,13 @@ namespace Projekt_WypozyczalniaFilmow.Models
         public int Id { get; set; }
         [StringLength(50, ErrorMessage = "Movie name cannot be longer than 50 characters.")]
         public string Name { get; set; }
+
+        public virtual ICollection<Movie> Movies { get; set; }
+        
+        public Category()
+        {
+            this.Movies = new HashSet<Movie>();
+        }
     }
 }
 

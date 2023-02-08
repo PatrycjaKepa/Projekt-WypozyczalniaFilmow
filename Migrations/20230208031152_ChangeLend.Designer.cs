@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt_WypozyczalniaFilmow.Data;
 
@@ -11,9 +12,10 @@ using Projekt_WypozyczalniaFilmow.Data;
 namespace Projekt_WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(Projekt_WypozyczalniaFilmowContext))]
-    partial class Projekt_WypozyczalniaFilmowContextModelSnapshot : ModelSnapshot
+    [Migration("20230208031152_ChangeLend")]
+    partial class ChangeLend
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,12 +79,7 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Lend", (string)null);
                 });
@@ -162,22 +159,6 @@ namespace Projekt_WypozyczalniaFilmow.Migrations
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.Lend", b =>
-                {
-                    b.HasOne("Projekt_WypozyczalniaFilmow.Models.User", "User")
-                        .WithMany("Lends")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Projekt_WypozyczalniaFilmow.Models.User", b =>
-                {
-                    b.Navigation("Lends");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,10 +18,16 @@ namespace Projekt_WypozyczalniaFilmow.Data
                     return;
                 }
 
+                var categories = new Category[]
+                {
+                    new Category { Name ="Horror"},
+                    new Category { Name ="Comedy"}
+                };
+
                 var movies = new Movie[]
                 {
-                    new  Movie { Name = "test1", Price = 20, Category = "Akcja", Description = "fajny film"},
-                    new  Movie { Name = "test2", Price = 20, Category = "Akcja", Description = "fajny film"}
+                    new  Movie { Name = "test1", Price = 20, Description = "fajny film"},
+                    new  Movie { Name = "test2", Price = 20, Description = "fajny film"}
                 };
 
                 foreach (Movie movie in movies)
