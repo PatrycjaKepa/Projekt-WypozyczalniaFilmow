@@ -8,7 +8,8 @@
 
 <h4>User</h4>
 <hr />
-<div class="row">
+@if(@Context.Session.GetInt32("role") == null) {
+    <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -43,6 +44,8 @@
         </form>
     </div>
 </div>
+}
+
 
 <div>
     <a asp-controller="Home" asp-action="Index">

@@ -58,6 +58,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -156,6 +157,40 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         private bool UserExists(int id)
         {
           return _context.User.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult LoginAction([Bind("Email,Password")] DAO.User user)
+        {
+            var authenticatedUser = _context.User.Where(
+                u => u.Email == user.Email &&
+                u.Password == user.Password
+                ).SingleOrDefault();
+
+            if (authenticatedUser == null)
+            {
+                ViewBag.error = "Coś poszło nie tak. Sprawdź e-mail lub hasło"; //loginPage - moze byc to samo, ale z parametrami i komunikatem bledu
+                return View("Login");
+            }
+
+            HttpContext.Session.SetString("user", authenticatedUser.Email);
+            HttpContext.Session.SetInt32("role", (int) authenticatedUser.Role);
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult LogoutAction()
+        {
+            HttpContext.Session.Clear();
+            return View(); //zwracasz widok wylogowania
         }
     }
 }

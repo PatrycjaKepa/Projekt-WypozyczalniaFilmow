@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projekt_WypozyczalniaFilmow.Models
 {
@@ -19,6 +20,10 @@ namespace Projekt_WypozyczalniaFilmow.Models
         [StringLength(30, ErrorMessage = "First name cannot be longer than 30 characters.")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string Password { get; set; }
+
+        [Required]
+        [DefaultValue((int)PermissionRole.User)]
+        public PermissionRole Role { get; set; }
 
         public ICollection<Lend> Lends { get; set; }
     }

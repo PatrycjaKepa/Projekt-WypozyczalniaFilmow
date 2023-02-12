@@ -2,16 +2,38 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-    
-    <div class="row">
-            <div class="vertical-line col-1 d-flex">
+    <div class="row d-flex">
+            <div class="vertical-line-left col-1 d-flex">
                 <div class="vl"></div>
             </div>
 
-            <div class="col-11">
-                <h1>Wypożycz film na DVD, jak za starych, dobrych czasów</h1>
+            <div class="col-8 home-page">
+                <div>
+                <h2 class="home-page-title">
+                    SPIDER-MAN: </br>
+                    INTO THE SPIDER-VERSE
+                </h2>
+                <p class="home-page-paragraph">
+                    Spider-Man: Into the Spider-Verse
+                    2018
+                    1 godz. 57 min.</br>
+                    Miles Morales po ukąszeniu przez radioaktywnego pająka staje do walki z nikczemnym Kingpinem. </br>
+                    Pomogą mu w tym Spider-Manowie z innych wymiarów.
+                </p>
+                <a asp-controller="Movies" asp-action="Index">
+                    <button class="btn btn-primary">
+                        Wynajmij już dziś 
+                    </button>
+                </a>
+                </div>
             </div>
+                
+                
+
+            <div class="vertical-line-right col-3 d-flex">
+                    <div class="vl"></div>
+            </div>
+
     </div>
         
     

@@ -25,6 +25,9 @@ namespace Projekt_WypozyczalniaFilmow
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            services.AddSession();
+
             services.AddDbContext<Projekt_WypozyczalniaFilmowContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Projekt_WypozyczalniaFilmowContext")));
 
@@ -46,6 +49,7 @@ namespace Projekt_WypozyczalniaFilmow
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
