@@ -1,18 +1,62 @@
-html {
-  font-size: 14px;
+
+.home-index {
+    background-image: url("../images/Spider-Universum.jpg");
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header{
+    margin: 0;
+}
+.logo {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+}
+.menu-element {
+    padding: 15px, 0, 15px, 0;
+    border-top: 1px solid white;
+    color: white;
+    font-size: 30px;
+}
+.log-reg {
+    text-align: right;
+}
+.content-admin {
+    text-align: left;
+    color: white;
+    height: 200px;
+}
+.home-page {
+    margin-top: 500px
+}
+.menu {
+    text-align: center;
+    background-color: #28282897;
+    height: 100vh;
+    border-right: 1px solid white;
+    padding: 0;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.vertical-line-left {
+    justify-content: end;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.vl {
+    border-left: 1px solid white;
+    height: 100vh;
 }
 
-body {
-  margin-bottom: 60px;
+
+.home-page-title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 70px;
+}
+
+.home-page-paragraph {
+    font-size: 20px;
+    word-spacing: 5px;
 }

@@ -8,18 +8,15 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        
-        public IActionResult Produkt(string name)
-        {
-            return View();
+            if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.Admin)
+            {
+                return View("IndexAdmin");//strona glowna po zalogowaniu sie admina
+            }
+            if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.User)
+            {
+                return View("IndexUser");//strona glowna po zalogowaniu sie użytkownika
+            }
+            return View("Index");
         }
     }
 }

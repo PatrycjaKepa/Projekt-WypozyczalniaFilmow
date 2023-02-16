@@ -18,7 +18,7 @@ namespace Projekt_WypozyczalniaFilmow.Models
         [StringLength(70, ErrorMessage = "First name cannot be longer than 70 characters.")]
         public string Email { get; set; }
         [StringLength(30, ErrorMessage = "First name cannot be longer than 30 characters.")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        
         public string Password { get; set; }
 
         [Required]

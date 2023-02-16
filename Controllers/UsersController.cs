@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projekt_WypozyczalniaFilmow.Data;
 using Projekt_WypozyczalniaFilmow.Models;
+using System.Text.RegularExpressions;
 
 namespace Projekt_WypozyczalniaFilmow.Controllers
 {
@@ -56,9 +57,19 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthdate,Email,Password")] User user)
         {
-            if (ModelState.IsValid)
+            string pattern = "[a-z][A-Z][0-9]";
+            Regex r = new Regex(pattern);
+            
+            if(ModelState.IsValid) 
             {
-
+                if (r.IsMatch(user.Password) == false)
+                {
+                    ViewBag.error = ("Hasło musi posiadać przynajmniej jedną dużą literę i cyfrę");
+                }
+            }
+            else
+            {
+                ViewBag.error = ("Hasło musi posiadać przynajmniej jedną dużą literę i cyfrę");
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -167,7 +178,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult LoginAction([Bind("Email,Password")] DAO.User user)
+        public IActionResult LoginAction([Bind("Email,Password")] User user)
         {
             var authenticatedUser = _context.User.Where(
                 u => u.Email == user.Email &&
@@ -183,14 +194,15 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             HttpContext.Session.SetString("user", authenticatedUser.Email);
             HttpContext.Session.SetInt32("role", (int) authenticatedUser.Role);
 
-            return View();
+            return Redirect("~/");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult LogoutAction()
         {
             HttpContext.Session.Clear();
-            return View(); //zwracasz widok wylogowania
+            
+            return Redirect("~/"); 
         }
     }
 }

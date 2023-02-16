@@ -2,24 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="row d-flex home-index">
+
+
+<div class="row d-flex home-index">
 
         <div class="col-2 menu">
             <a class="nav-link p-4 logo" asp-controller="Home" asp-action="Index">Logo</a>
             <a class="nav-link p-4 menu-element" asp-controller="Home" asp-action="Index"><h4>Home</h4></a>
             <a class="nav-link p-4 menu-element" asp-controller="Movies" asp-action="Index"><h4>Movies</h4></a>
-            <a class="nav-link p-4 menu-element" asp-controller="Home" asp-action="MovieRentalPolicies"><h4>Movie rental policies</h4></a>
+            <a class="nav-link p-4 menu-element" asp-controller="Lends" asp-action="Index"><h4>My Lends</h4></a>
+            <a class="nav-link p-4 menu-element" asp-controller="Lends" asp-action="Index"><h4>Profile</h4></a>
+            <a class="nav-link p-4 menu-element" asp-controller="Users" asp-action="LogoutAction">Log out</a>
         </div>
-
-        <div class="col-10 log-reg">
-            <a asp-controller="Users" asp-action="Create">
-                <button class="btn btn-primary" type="button">Registration</button>
-            </a>
-            <a asp-controller="Users" asp-action="Login">
-            <button class="btn btn-primary">Login</button>
-        </a>
-
-         <div class="col-10 d-flex">
+        <div class="col-10 d-flex">
             <div class="row content-admin">
                 <div class="row home-page">
                     <div class="col-12 ">
@@ -49,9 +44,5 @@
                 </div>
             </div>
             </div>
-     </div>
-     </div>
-
-    
-    
-
+            </div>
+     

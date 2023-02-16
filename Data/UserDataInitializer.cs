@@ -20,8 +20,8 @@ namespace Projekt_WypozyczalniaFilmow.Data
 
                 var users = new User[]
                 {
-                    new  User { FirstName = "test1", LastName = "test1sur",  Email = "test1@test.pl", Password = "test1"},
-                    new  User { FirstName = "test1", LastName = "test1sur", Email = "test1@test.pl", Password = "test1"}
+                    new  User { FirstName = "user", LastName = "test1",  Email = "user@user1.pl", Password = "user1", Role = PermissionRole.User },
+                    new  User { FirstName = "admin", LastName = "test2",  Email = "admin@admin1.pl", Password = "admin1", Role = PermissionRole.Admin }
                 };
 
                 foreach (User user in users)
