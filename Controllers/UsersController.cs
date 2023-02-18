@@ -192,6 +192,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             }
 
             HttpContext.Session.SetString("user", authenticatedUser.Email);
+            HttpContext.Session.SetInt32("userId", authenticatedUser.Id);
             HttpContext.Session.SetInt32("role", (int) authenticatedUser.Role);
 
             return Redirect("~/");
@@ -203,6 +204,11 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             HttpContext.Session.Clear();
             
             return Redirect("~/"); 
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
         }
     }
 }

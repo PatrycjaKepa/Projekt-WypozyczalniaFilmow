@@ -22,7 +22,56 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         // GET: Lends
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Lend.ToListAsync());
+            var lends = from m in _context.Lend
+                        select m;
+
+            if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.User)
+            {
+                lends = lends.Where(s => s.UserId == HttpContext.Session.GetInt32("userId"));
+                return View(await lends.ToListAsync());
+            }
+            return RedirectToAction("Login", "Users");
+        }
+        [HttpGet]
+        public IActionResult Rent(int id)
+        {
+            var lend = new Lend();
+            var movie = _context.Movie.Where(m => m.Id == id).FirstOrDefault();
+            if (movie == null)
+            {
+                return RedirectToAction("Index", "Home");//przekierowanie do bledu
+            }
+            lend.Movie = movie;
+            return View(lend);
+        }
+
+        [HttpPost]
+        public IActionResult RentAction(int User, int Movie, DateTime RentDate, DateTime ReturnDate)
+        {
+            var movie = _context.Movie.Where(m => m.Id == Movie).FirstOrDefault();
+            if (movie == null)
+            {
+                return RedirectToAction("");//przekierowanie do bledu
+            }
+            var lend = new Lend();
+            lend.User = _context.User.Where(m => m.Id == User).First();
+            lend.Movie = _context.Movie.Where(m => m.Id == Movie).First();
+            lend.RentDate = RentDate;
+            lend.ReturnDate = ReturnDate;
+            //todo musisz dodać wartości do Lend
+            //var lendsForMovie = _context.Lend.Where(m => m.Movie == lend.Movie &&
+            //(
+            //m.ReturnDate == null || (
+            //m.RentDate > lend.ReturnDate && m.ReturnDate > lend.RentDate)
+            //)
+            //).FirstOrDefault();
+            //if (lendsForMovie != null)
+            //{
+            //    return RedirectToAction();// nie można wypożyczyć
+            //}
+            _context.Add(lend);
+            _context.SaveChanges();
+            return RedirectToAction("");//przekierowanie do wypozyczen
         }
 
         // GET: Lends/Details/5

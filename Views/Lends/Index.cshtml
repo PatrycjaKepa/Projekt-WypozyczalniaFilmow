@@ -4,43 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="row movies-header d-flex">
+    <div class="col-12 ">
+        <a class="nav-link logo" asp-controller="Home" asp-action="Index">Logo</a>
+    </div>
+</div>
 <h1>Lends</h1>
 
 <div class="row">
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MovieName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReturnDate)
-            </th>
-            
-            <th></th>
+        <tr class="table-tr">
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.User)</th>
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.Movie)</th>
+            <th scope="col-auto"> @Html.DisplayNameFor(model => model.RentDate)</th>
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.ReturnDate)</th>
+            <th scope="col-auto"></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovieName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.User.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Movie.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.RentDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.ReturnDate)</td>
             
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>

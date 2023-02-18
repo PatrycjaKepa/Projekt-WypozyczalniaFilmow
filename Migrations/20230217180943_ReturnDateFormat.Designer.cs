@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt_WypozyczalniaFilmow.Data;
 
@@ -11,9 +12,10 @@ using Projekt_WypozyczalniaFilmow.Data;
 namespace Projekt_WypozyczalniaFilmow.Migrations
 {
     [DbContext(typeof(Projekt_WypozyczalniaFilmowContext))]
-    partial class Projekt_WypozyczalniaFilmowContextModelSnapshot : ModelSnapshot
+    [Migration("20230217180943_ReturnDateFormat")]
+    partial class ReturnDateFormat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

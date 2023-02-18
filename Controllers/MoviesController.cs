@@ -196,6 +196,11 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         {
           return _context.Movie.Any(e => e.Id == id);
         }
+
+        public IActionResult MovieRentalPolicies()
+        {
+            return View();
+        }
     }
     
 }

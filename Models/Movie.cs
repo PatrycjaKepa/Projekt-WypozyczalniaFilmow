@@ -23,5 +23,10 @@ namespace Projekt_WypozyczalniaFilmow.Models
         {
             this.Categories = new HashSet<Category>();
         }
+
+        public string ToString()
+        {
+            return Name;
+        }
     }
 }

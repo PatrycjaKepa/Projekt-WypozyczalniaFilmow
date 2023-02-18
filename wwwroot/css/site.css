@@ -10,12 +10,12 @@
 .header{
     margin: 0;
 }
-.logo {
+.logo-main {
     color: white;
     font-size: 50px;
     text-align: center;
-    color: white;
 }
+
 .menu-element {
     padding: 15px, 0, 15px, 0;
     border-top: 1px solid white;
@@ -40,17 +40,6 @@
     border-right: 1px solid white;
     padding: 0;
 }
-
-.vertical-line-left {
-    justify-content: end;
-}
-
-.vl {
-    border-left: 1px solid white;
-    height: 100vh;
-}
-
-
 .home-page-title {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 70px;
@@ -59,4 +48,23 @@
 .home-page-paragraph {
     font-size: 20px;
     word-spacing: 5px;
+}
+
+
+.movies-header {
+    height: 130px;
+    background-color: #fe8b1c;
+    align-items:center;
+}
+.logo {
+    color: white;
+    font-size: 50px;
+    text-align: left;
+}
+.table-tr{
+    color:white;
+    background-color: #32c0ff;
+}
+.create-users {
+    background-color: #32c0ff;
 }

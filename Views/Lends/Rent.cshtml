@@ -1,0 +1,41 @@
+﻿@model Projekt_WypozyczalniaFilmow.Models.Lend
+@{
+    ViewData["Title"] = "Rent";
+}
+
+<div class="row movies-header d-flex">
+    <div class="col-12 ">
+        <a class="nav-link logo" asp-controller="Home" asp-action="Index">Logo</a>
+    </div>
+</div>
+<h1>Rent movie</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RentAction" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="User" name="User" class="form-control" type="hidden" value="@Context.Session.GetInt32("userId")"/>
+                <span asp-validation-for="User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Movie" name="Movie" class="form-control" type="hidden" value="@Context.GetRouteValue("id")"/>
+                <span asp-validation-for="Movie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RentDate" class="control-label"></label>
+                <input asp-for="RentDate" name="RentDate" class="form-control" />
+                <span asp-validation-for="RentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label"></label>
+                <input asp-for="ReturnDate" name="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>
+            <p style="color:red">@ViewBag.Error</p>
+        <div class="form-group">
+                <input type="submit" value="Accept" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

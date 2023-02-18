@@ -4,66 +4,72 @@
     ViewData["Title"] = "Index";
 }
 
-
-<a asp-controller="Home" asp-action="Index">Logo</a>
-
-<form asp-controller="Movies" asp-action="Index" method="GET">
-    <div class="form-group">
-        <label class="control-label">Name: </label><input type="text"  class="form-control" name="name" value="@(Context.Request.Query["name"])" />
-        <input type="submit" class="btn btn-primary" value="Search" />
+<div class="row movies-header d-flex">
+    <div class="col-12 ">
+        <a class="nav-link logo" asp-controller="Home" asp-action="Index">Logo</a>
     </div>
-</form>
+</div>
+<div class="col-12 form-group pt-5 pb-5">
+    <form class="row" asp-controller="Movies" asp-action="Index" method="GET">
+        <div class="col-10">
+            <label class="visually-hidden control-label" id="inputName">Name: </label>
+            <input type="text" class="form-control" id="inputName" name="name" value="@(Context.Request.Query["name"])" />
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+        </div>
+    </form>
+    @if (@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
+    {
+        <div class="row">
+            <a class="btn btn-primary" asp-action="Create">Create New</a>
+        </div>
+    }
+</div>
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.Categories)
-            </th
-            <th></th>
+        <tr class="table-tr">
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.Name)</th>
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.Price)</th>
+            <th scope="col-auto">@Html.DisplayNameFor(model => model.Description)</th>
+            <th scope="col-auto"> @Html.DisplayNameFor(model => model.Categories)</th>
+            <th scope="col-auto"></th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categories)
-            </td>
-            @if(@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
-                {
+        @foreach (var item in Model) 
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Categories)</td>
+           
+            @if (@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
+            {
                 <td>
-                    <a class="btn btn-primary" asp-action="Create" asp-route-id="@item.Id">Create New</a>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
-                }
-                else
+            }
+            else if(@Context.Session.GetInt32("role") == (int)PermissionRole.User)
                 {
                     <td>
-                        <a class="btn btn-primary" asp-controller="Lends" asp-action="Index" asp-route-id="@item.Id">
+                        <a class="btn btn-primary" asp-controller="Lends" asp-action="Rent" asp-route-id="@item.Id">
                             Wypożycz
-                            </a>
+                        </a>
                     </td>
-                }
-        </tr>
-}
+                } else
+            {
+                <td>
+                    <a class="btn btn-primary" asp-controller="Lends" asp-action="Index" asp-route-id="@item.Id">
+                        Nie ma wypożyczania :)
+                    </a>
+                </td>
+            } 
+            </tr>
+        }
     </tbody>
 </table>

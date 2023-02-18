@@ -26,5 +26,10 @@ namespace Projekt_WypozyczalniaFilmow.Models
         public PermissionRole Role { get; set; }
 
         public ICollection<Lend> Lends { get; set; }
+
+        public string ToString()
+        {
+            return FirstName;
+        }
     }
 }
