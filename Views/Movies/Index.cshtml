@@ -30,11 +30,11 @@
 <table class="table">
     <thead>
         <tr class="table-tr">
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.Name)</th>
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.Price)</th>
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.Description)</th>
-            <th scope="col-auto"> @Html.DisplayNameFor(model => model.Categories)</th>
-            <th scope="col-auto"></th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.Name)</th>
+            <th class="col-1">@Html.DisplayNameFor(model => model.Price) (for day)</th>
+            <th class="col-">@Html.DisplayNameFor(model => model.Description)</th>
+            <th class="col-2"> @Html.DisplayNameFor(model => model.Categories)</th>
+            <th class="col-2"></th>
         </tr>
     </thead>
 
@@ -46,29 +46,24 @@
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>@Html.DisplayFor(modelItem => item.Categories)</td>
-           
-            @if (@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
-            {
                 <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
+                    {
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                    else if(@Context.Session.GetInt32("role") == (int)PermissionRole.User)
+                        {
+                                <a class="btn btn-primary" asp-controller="Lends" asp-action="Rent" asp-route-id="@item.Id">
+                                    Wypożycz
+                                </a>
+                        } else
+                    {
+                            <a class="btn btn-primary" asp-controller="Lends" asp-action="Index" asp-route-id="@item.Id">
+                                Nie ma wypożyczania bez zalogowania :)
+                            </a>
+                    } 
                 </td>
-            }
-            else if(@Context.Session.GetInt32("role") == (int)PermissionRole.User)
-                {
-                    <td>
-                        <a class="btn btn-primary" asp-controller="Lends" asp-action="Rent" asp-route-id="@item.Id">
-                            Wypożycz
-                        </a>
-                    </td>
-                } else
-            {
-                <td>
-                    <a class="btn btn-primary" asp-controller="Lends" asp-action="Index" asp-route-id="@item.Id">
-                        Nie ma wypożyczania :)
-                    </a>
-                </td>
-            } 
             </tr>
         }
     </tbody>

@@ -20,8 +20,9 @@ namespace Projekt_WypozyczalniaFilmow.Data
 
                 var users = new User[]
                 {
-                    new  User {FirstName = "user", LastName = "test1",  Email = "user@user1.pl", Password = "user1", Role = PermissionRole.User },
-                    new  User {FirstName = "admin", LastName = "test2",  Email = "admin@admin1.pl", Password = "admin1", Role = PermissionRole.Admin }
+                    new  User {FirstName = "Janek", LastName = "Użytkownik",  Email = "janek@user1.pl", Password = "Janek123", Role = PermissionRole.User },
+                    new  User {FirstName = "Sylwia", LastName = "Użytkownik",  Email = "sylwia@user2.pl", Password = "Sylwia123", Role = PermissionRole.User },
+                    new  User {FirstName = "Mietek", LastName = "Administrator",  Email = "mietek@admin.pl", Password = "Mietek123", Role = PermissionRole.Admin }
                 };
 
                 foreach (User user in users)
@@ -37,28 +38,48 @@ namespace Projekt_WypozyczalniaFilmow.Data
 
                 var categories = new Category[]
                 {
+                    new Category { Name ="Thriller"},
                     new Category { Name ="Horror"},
-                    new Category { Name ="Comedy"},
-                    new Category { Name ="Action"}
+                    new Category { Name ="Psychologiczny"},
+                    new Category { Name ="Czarna komedia "},
+                    new Category { Name ="Akcja"},
+                    new Category { Name ="Kryminał"}
                 };
 
                 ICollection<Category> categories1 = new List<Category>
                 {
-                    categories[1],
-                    categories[2]
+                    categories[0]
                 };
 
                 ICollection<Category> categories2 = new List<Category>
                 {
-                    categories[1],
-                    categories[0]
+                    categories[4],
+                    categories[5]
+                };
+
+                ICollection<Category> categories3 = new List<Category>
+                {
+                    categories[1]
+                };
+
+                ICollection<Category> categories4 = new List<Category>
+                {
+                    categories[2]
+                };
+                ICollection<Category> categories5 = new List<Category>
+                {
+                    categories[3]
                 };
 
                 var movies = new Movie[]
                 {
-                    new  Movie {Categories = categories1, Name = "Avatar", Price = 20, Description = "fajny film"},
-                    new  Movie {Categories = categories2,  Name = "Pukając do drzwi", Price = 20, Description = "fajny film"},
-                    new  Movie {Categories = categories2,  Name = "Terminator", Price = 20, Description = "fajny film"}
+                    new  Movie {Categories = categories1, Name = "The Infernal Machine", Price = (decimal) 20, Description = "Kontrowersyjny i samotny pisarz musi się ujawnić, gdy zaczyna otrzymywać niepokojące listy od psychofana."},
+                    new  Movie {Categories = categories2,  Name = "Lou", Price = (decimal) 20, Description = "Szorstka samotniczka wiodąca spokojne życie ze swym psem staje do walki z żywiołami i własną mroczną przeszłością, gdy córeczka sąsiadki zostaje porwana podczas burzy."},
+                    new  Movie {Categories = categories1 ,  Name = "Violent Night", Price = (decimal) 2.00, Description = "Gdy grupa najemników atakuje posiadłość zamożnej rodziny, Święty Mikołaj musi wkroczyć, aby uratować dzień (i Boże Narodzenie)."},
+                    new  Movie {Categories = categories3,  Name = "The Invitation", Price = (decimal) 2.00, Description = "Po wykonaniu testu DNA Evie odnajduję rodzinę, o której istnieniu nie wiedziała. Zaproszona na wystawne wesele początkowo jest nimi zafascynowana, ale na światło dzienne wychodzą przerażające rodzinne sekrety."},
+                    new  Movie {Categories = categories4,  Name = "Jaula", Price = (decimal) 2.00, Description = "Kiedy pewna para znajduje doświadczone przez los dziecko, kobieta stara się zrozumieć dziwne zachowania dziewczynki, by odkryć jej tożsamość i mroczną przeszłość."},
+                    new  Movie {Categories = categories3,  Name = "Smile", Price = (decimal) 2.00, Description = "Po tym, jak dr Rose Carter bierze udział w traumatycznym zdarzeniu z udziałem pacjentki, wokół niej zaczynają dziać się niewytłumaczalne rzeczy."},
+                    new  Movie {Categories = categories5,  Name = "The Menu", Price = (decimal) 2.00, Description = "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki."}
                 };
 
                 foreach (Movie movie in movies)

@@ -25,10 +25,26 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             var lends = from m in _context.Lend
                         select m;
 
-            if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.User)
+            lends.Include(m => m.User);
+            lends.Include(m => m.Movie);
+
+            if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.User ||
+                HttpContext.Session.GetInt32("role") == (int)PermissionRole.Admin
+                )
             {
-                lends = lends.Where(s => s.UserId == HttpContext.Session.GetInt32("userId"));
+                if (HttpContext.Session.GetInt32("role") == (int)PermissionRole.User)
+                {
+                    lends = lends.Where(s => s.UserId == HttpContext.Session.GetInt32("userId"));
+                }
                 return View(await lends.ToListAsync());
+            }
+            if(TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+            if (TempData["success"] != null)
+            {
+                ViewBag.succes = TempData["success"].ToString();
             }
             return RedirectToAction("Login", "Users");
         }
@@ -42,23 +58,38 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
                 return RedirectToAction("Index", "Home");//przekierowanie do bledu
             }
             lend.Movie = movie;
+
+            if(TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+
             return View(lend);
         }
 
         [HttpPost]
         public IActionResult RentAction(int User, int Movie, DateTime RentDate, DateTime ReturnDate)
         {
+            if (RentDate > ReturnDate || RentDate < new DateTime())
+            {
+                TempData["error"] = "Data wypożyczenia nie może być w czasie przyszlym, ani być większa, niż data oddania";
+                return RedirectToAction("Rent", "Lends", new { id = Movie });
+                //ViewBag.error = "Data wypożyczenia nie może być w czasie przyszlym, ani być większa, niż data oddania";
+                //return RedirectToAction("Rent", "Lends", new { id = Movie });
+            }
             var movie = _context.Movie.Where(m => m.Id == Movie).FirstOrDefault();
             if (movie == null)
             {
-                return RedirectToAction("");//przekierowanie do bledu
+                ViewBag.error = "Film nie istnieje";
+                return RedirectToAction("Rent", "Lends", new { id = Movie });
             }
             var lend = new Lend();
             lend.User = _context.User.Where(m => m.Id == User).First();
             lend.Movie = _context.Movie.Where(m => m.Id == Movie).First();
             lend.RentDate = RentDate;
             lend.ReturnDate = ReturnDate;
-            //todo musisz dodać wartości do Lend
+            lend.lendStatus = LendStatus.Rented;
+            lend.Price = (ReturnDate - RentDate).Days * lend.Movie.Price;
             //var lendsForMovie = _context.Lend.Where(m => m.Movie == lend.Movie &&
             //(
             //m.ReturnDate == null || (
@@ -71,7 +102,7 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
             //}
             _context.Add(lend);
             _context.SaveChanges();
-            return RedirectToAction("");//przekierowanie do wypozyczen
+            return Redirect("~/Lends/");//przekierowanie do wypozyczen
         }
 
         // GET: Lends/Details/5
@@ -205,6 +236,61 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
         private bool LendExists(int id)
         {
           return _context.Lend.Any(e => e.Id == id);
+        }
+
+        public IActionResult SetPaid(int id)
+        {
+            var lend = _context.Lend.Where(m => m.Id == id).FirstOrDefault();
+            if (lend == null)
+            {
+                ViewBag.error = "Zamówienie nie istnieje";
+            }
+            if (!lend.isRented())
+            {
+                ViewBag.error = "Zamówienie nie jest w statusie " + LendStatus.Rented;
+            }
+            lend.lendStatus = LendStatus.Paid;
+            _context.Update(lend);
+            _context.SaveChanges();
+            TempData["success"] = "Zmieniono status zamówienia";
+            //ViewBag.success = "Zmieniono status zamówienia";
+            return RedirectToAction("Index", "Lends");
+        }
+
+        public IActionResult SetRejected(int id)
+        {
+            var lend = _context.Lend.Where(m => m.Id == id).FirstOrDefault();
+            if (lend == null)
+            {
+                ViewBag.error = "Zamówienie nie istnieje";
+            }
+            if (!lend.isRented())
+            {
+                ViewBag.error = "Zamówienie nie jest w statusie " + LendStatus.Rented;
+            }
+            lend.lendStatus = LendStatus.Rejected;
+            _context.Update(lend);
+            _context.SaveChanges();
+            ViewBag.success = "Zmieniono status zamówienia";
+            return RedirectToAction("Index", "Lends");
+        }
+
+        public IActionResult SetCanceled(int id)
+        {
+            var lend = _context.Lend.Where(m => m.Id == id).FirstOrDefault();
+            if (lend == null)
+            {
+                ViewBag.Error = "Zamówienie nie istnieje";
+            }
+            if (!lend.isRented())
+            {
+                ViewBag.Error = "Zamówienie nie jest w statusie " + LendStatus.Rented;
+            }
+            lend.lendStatus = LendStatus.Canceled;
+            _context.Update(lend);
+            _context.SaveChanges();
+            ViewBag.Success = "Zmieniono status zamówienia";
+            return RedirectToAction("Index", "Lends");
         }
     }
 }

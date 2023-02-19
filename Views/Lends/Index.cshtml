@@ -9,17 +9,30 @@
         <a class="nav-link logo" asp-controller="Home" asp-action="Index">Logo</a>
     </div>
 </div>
-<h1>Lends</h1>
+<h1 class="pt-4 pb-4">Lends</h1>
+
+
+    @if (ViewBag.error != null)
+    {
+        <p style="color:red">@ViewBag.error</p>
+    }
+    @if (ViewBag.success != null)
+    {
+        <p style="color:green">@ViewBag.success</p>
+    }
+
 
 <div class="row">
 <table class="table">
     <thead>
         <tr class="table-tr">
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.User)</th>
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.Movie)</th>
-            <th scope="col-auto"> @Html.DisplayNameFor(model => model.RentDate)</th>
-            <th scope="col-auto">@Html.DisplayNameFor(model => model.ReturnDate)</th>
-            <th scope="col-auto"></th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.User)</th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.Movie)</th>
+            <th class="col-2"> @Html.DisplayNameFor(model => model.RentDate)</th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.ReturnDate)</th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.lendStatus)</th>
+            <th class="col-2">@Html.DisplayNameFor(model => model.Price)</th>
+            <th class="col-4"></th>
         </tr>
     </thead>
     <tbody>
@@ -29,11 +42,25 @@
             <td>@Html.DisplayFor(modelItem => item.Movie.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.RentDate)</td>
             <td>@Html.DisplayFor(modelItem => item.ReturnDate)</td>
-            
+            <td>@Html.DisplayFor(modelItem => item.lendStatus)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                @if (@Context.Session.GetInt32("role") == (int)PermissionRole.Admin)
+                    {
+                        @if(item.isRented())
+                        {
+                            <a asp-action="SetPaid" asp-route-id="@item.Id">SetPaid</a>
+                            <a asp-action="SetRejected" asp-route-id="@item.Id">SetRejected</a>
+                        }
+                    }
+                    else if(@Context.Session.GetInt32("role") == (int)PermissionRole.User)
+                    {
+                        @if(item.isRented())
+                        {
+                            <a asp-action="SetCanceled" asp-route-id="@item.Id">SetCanceled</a>
+                        }
+                    }
+                    </td>
         </tr>
 }
     </tbody>

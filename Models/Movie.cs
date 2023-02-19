@@ -10,6 +10,7 @@ namespace Projekt_WypozyczalniaFilmow.Models
         [StringLength(50, ErrorMessage = "Movie name cannot be longer than 50 characters.")]
         public string Name { get; set; }
         [Column(TypeName = "decimal(18,2)")]
+        [Required]
         public decimal Price { get; set; }
         
         [StringLength(300, ErrorMessage = "Description cannot be longer than 300 characters.")]

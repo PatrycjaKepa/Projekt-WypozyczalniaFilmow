@@ -68,3 +68,11 @@
 .create-users {
     background-color: #32c0ff;
 }
+.questions {
+    background-color: #32c0ff;
+    border: 1px solid #32c0ff;
+    border-radius: 20px;
+}
+.footer-content {
+    align-items: end;
+}

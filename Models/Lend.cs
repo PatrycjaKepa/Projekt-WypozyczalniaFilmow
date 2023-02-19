@@ -15,5 +15,16 @@ namespace Projekt_WypozyczalniaFilmow.Models
         public DateTime ReturnDate { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+
+        //[Required]
+        //[DefaultValue((int)LendStatus.Rented)]
+        public LendStatus lendStatus { get; set; }
+
+        public bool isRented()
+        {
+            return this.lendStatus == LendStatus.Rented;
+        }
     }
 }

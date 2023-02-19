@@ -3,12 +3,19 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+<div class="row movies-header d-flex">
+    <div class="col-12 ">
+        <a class="nav-link logo" asp-controller="Home" asp-action="Index">Logo</a>
+    </div>
+</div>
+
+<h1 class="pt-4 pb-4">Login</h1>
+
 @if (ViewBag.Error != null)
 {
     <p style="color:red">@ViewBag.Error</p>
 }
-<div class="row">
+<div class="row pb-4">
     <div class="col-md-4">
         <form asp-action="LoginAction" method="POST">
             <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
@@ -22,18 +29,19 @@
                     <input asp-for="Password" type="password" class="form-control" required="required"/>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-4">
                 <input type="submit" value="Login" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
+@*<div>
     <a asp-controller="Home" asp-action="Index">
         <button class="btn btn-primary">
             Back
         </button>
         </a>
-</div>
+</div>*@
 
