@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Projekt_WypozyczalniaFilmow.Models
 {
-    public class User
+    public class User 
     {
         
         public int Id { get; set; }

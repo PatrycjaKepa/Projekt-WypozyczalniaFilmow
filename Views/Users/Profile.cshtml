@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Projekt_WypozyczalniaFilmow.Models.User
+
+@{
     ViewData["Title"] = "Login";
 }
 
@@ -10,6 +12,17 @@
 
 <h1 class="pt-4 pb-4">Your Profile</h1>
 
-<div>
+<div class="row" style="background-color: #32c0ff">
+    <div class="col-12">
+        Imię: @Html.DisplayFor(model => model.FirstName)
+        
+    </div>
+    <div class="col-12">
+        Nazwisko: @Html.DisplayFor(model => model.LastName)
 
+    </div>
+    <div class="col-12">
+        Email: @Html.DisplayFor(model => model.Email)
+
+    </div>
 </div>

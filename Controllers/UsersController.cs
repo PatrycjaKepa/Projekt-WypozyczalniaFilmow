@@ -208,7 +208,13 @@ namespace Projekt_WypozyczalniaFilmow.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            var userId = HttpContext.Session.GetInt32("userId");
+            if (userId == null)
+            {
+                return View("Index", "Home");
+            }
+            var user = _context.User.Where(m => m.Id == userId);
+            return View(user.First());
         }
     }
 }
